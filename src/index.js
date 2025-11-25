@@ -186,6 +186,24 @@ class hashMap {
 
     }
 
+    length() {
+
+        let keyCounter = 0;
+        
+        for (let bucket of this.map) {
+
+            if (bucket) {
+            
+                keyCounter += bucket.size();
+
+            }
+
+        }
+
+        return keyCounter;
+
+    }
+
 };
 
 const hashBrown = new hashMap(0.75, 16);
@@ -199,7 +217,7 @@ hashBrown.set('Former','Robert');
 console.log(hashBrown.get('King'));
 console.log(hashBrown.has('King'));
 console.log(hashBrown.has('Heir'));
-console.log(hashBrown.remove('King'));
+// console.log(hashBrown.remove('King'));
 console.log(hashBrown.has('King'));
 // console.log(hashBrown.map[7].size());
 console.log(hashBrown.map[8]);
@@ -209,6 +227,8 @@ console.log(!hashBrown.map[7]);
 
 
 console.log(hashBrown.map);
+console.log(hashBrown.length());
+
 // console.log(hashBrown.map[7].toStringMap());
 
 
