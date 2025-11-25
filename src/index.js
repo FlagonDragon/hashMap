@@ -17,19 +17,38 @@ class hashMap {
 
         const primeNumber = 31;
         for (let i = 0; i < key.length; i++) {
-            hashCode = (primeNumber * hashCode + key.charCodeAt(i));
+            hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
         }
 
-        return hashCode % this.capacity;
+        return hashCode;
 
     }
 
     set(key, value) {
 
+        if (this.length() == this.capacity * this.loadFactor) {
+
+            console.log('THE TIME IS NOW');
+
+            this.capacity *= 2;        
+            
+            let keyValuePairs = this.entries();
+
+            this.clear();
+
+            console.log(keyValuePairs);
+
+            for (let obj of keyValuePairs) {
+                
+                this.set(obj.key,obj.value);
+
+            }
+            
+        }
+
         let hashCode = this.hash(key);
 
         console.log(hashCode);
-        
 
         if (hashCode < 0 || hashCode >= this.capacity) {
             throw new Error("Trying to access index out of bounds");
@@ -312,7 +331,10 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
+test.set('moon', 'silver')
 
+// console.log(test.length());
+console.log(test.capacity);
 console.log(test.values());
 console.log(test.entries());
 console.log(test.map);
