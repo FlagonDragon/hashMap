@@ -204,6 +204,22 @@ class hashMap {
 
     }
 
+    clear() {
+        
+        for (let bucket of this.map) {
+
+            if (bucket) {
+            
+                this.map[this.map.indexOf(bucket)] = undefined;
+
+            }
+
+        }
+
+        return 'Map cleared';
+
+    }
+
 };
 
 const hashBrown = new hashMap(0.75, 16);
@@ -225,6 +241,7 @@ console.log(hashBrown.map[8]);
 console.log(!hashBrown.map[7]);
 
 
+console.log(hashBrown.clear());
 
 console.log(hashBrown.map);
 console.log(hashBrown.length());
