@@ -252,6 +252,38 @@ class hashMap {
 
     }
 
+    entries() {
+
+        let entries = [];
+        
+        for (let bucket of this.map) {
+
+            if (bucket) {
+
+                bucket.pointer = bucket.head;
+
+                while (bucket.pointer.nextNode != null || bucket.pointer == bucket.head) {
+
+                    entries.push(bucket.pointer.value);
+
+                    bucket.pointer = bucket.pointer.nextNode;
+
+                    if (bucket.pointer == null) {
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return entries;
+
+    }
+
 };
 
 const hashBrown = new hashMap(0.75, 16);
@@ -276,6 +308,7 @@ console.log(!hashBrown.map[7]);
 // console.log(hashBrown.clear());
 
 console.log(hashBrown.values());
+console.log(hashBrown.entries());
 
 console.log(hashBrown.map);
 // console.log(hashBrown.length());
