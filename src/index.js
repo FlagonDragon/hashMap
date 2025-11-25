@@ -17,16 +17,19 @@ class hashMap {
 
         const primeNumber = 31;
         for (let i = 0; i < key.length; i++) {
-            hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
+            hashCode = (primeNumber * hashCode + key.charCodeAt(i));
         }
 
-        return hashCode;
+        return hashCode % this.capacity;
 
     }
 
     set(key, value) {
 
         let hashCode = this.hash(key);
+
+        console.log(hashCode);
+        
 
         if (hashCode < 0 || hashCode >= this.capacity) {
             throw new Error("Trying to access index out of bounds");
@@ -40,7 +43,7 @@ class hashMap {
 
             this.map[hashCode].pointer = this.map[hashCode].head
 
-            while (this.map[hashCode].pointer.nextNode != null || this.map[hashCode].pointer == this.map[hashCode].head) {
+            while (this.map[hashCode].pointer != null || this.map[hashCode].pointer == this.map[hashCode].head) {
 
                 if (this.map[hashCode].pointer.value.key == key) {
 
@@ -54,13 +57,13 @@ class hashMap {
 
                 }
 
-                this.map[hashCode].pointer = this.map[hashCode].pointer.nextNode;
-
-                if (this.map[hashCode].pointer == null) {
+                if (this.map[hashCode].pointer.nextNode == null) {
 
                     break;
 
                 }
+
+                this.map[hashCode].pointer = this.map[hashCode].pointer.nextNode;
                 
             }
 
@@ -80,7 +83,7 @@ class hashMap {
 
                 bucket.pointer = bucket.head;
 
-                while (bucket.pointer.nextNode != null || bucket.pointer == bucket.head) {
+                while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
                     if (bucket.pointer.value.key == key) {
 
@@ -88,13 +91,13 @@ class hashMap {
 
                     }
 
-                    bucket.pointer = bucket.pointer.nextNode;
-
-                    if (bucket.pointer == null) {
+                    if (bucket.pointer.nextNode == null) {
 
                         break;
 
                     }
+
+                    bucket.pointer = bucket.pointer.nextNode;
 
                 }
 
@@ -114,7 +117,7 @@ class hashMap {
 
                 bucket.pointer = bucket.head;
 
-                while (bucket.pointer.nextNode != null || bucket.pointer == bucket.head) {
+                while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
                     if (bucket.pointer.value.key == key) {
 
@@ -122,13 +125,13 @@ class hashMap {
 
                     }
 
-                    bucket.pointer = bucket.pointer.nextNode;
-
-                    if (bucket.pointer == null) {
+                    if (bucket.pointer.nextNode == null) {
 
                         break;
 
                     }
+
+                    bucket.pointer = bucket.pointer.nextNode;
 
                 }
 
@@ -148,7 +151,7 @@ class hashMap {
 
                 bucket.pointer = bucket.head;
 
-                while (bucket.pointer.nextNode != null || bucket.pointer == bucket.head) {
+                while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
                     if (bucket.pointer.value.key == key) {
 
@@ -168,13 +171,13 @@ class hashMap {
 
                     }
 
-                    bucket.pointer = bucket.pointer.nextNode;
-
-                    if (bucket.pointer == null) {
+                    if (bucket.pointer.nextNode == null) {
 
                         break;
 
                     }
+
+                    bucket.pointer = bucket.pointer.nextNode;
 
                 }
 
@@ -230,17 +233,17 @@ class hashMap {
 
                 bucket.pointer = bucket.head;
 
-                while (bucket.pointer.nextNode != null || bucket.pointer == bucket.head) {
+                while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
                     values.push(bucket.pointer.value.value);
 
-                    bucket.pointer = bucket.pointer.nextNode;
-
-                    if (bucket.pointer == null) {
+                    if (bucket.pointer.nextNode == null) {
 
                         break;
 
                     }
+
+                    bucket.pointer = bucket.pointer.nextNode;
 
                 }
 
@@ -262,17 +265,17 @@ class hashMap {
 
                 bucket.pointer = bucket.head;
 
-                while (bucket.pointer.nextNode != null || bucket.pointer == bucket.head) {
+                while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
                     entries.push(bucket.pointer.value);
 
-                    bucket.pointer = bucket.pointer.nextNode;
-
-                    if (bucket.pointer == null) {
+                    if (bucket.pointer.nextNode == null) {
 
                         break;
 
                     }
+
+                    bucket.pointer = bucket.pointer.nextNode;
 
                 }
 
@@ -286,35 +289,33 @@ class hashMap {
 
 };
 
-const hashBrown = new hashMap(0.75, 16);
+// const hashBrown = new hashMap(0.75, 16);
+// console.log(hashBrown.loadFactor+' '+hashBrown.capacity);
+// hashBrown.set('King','Stannis');
+// hashBrown.set('Hand','Renly');
+// hashBrown.set('Former','Robert');
+// console.log(hashBrown.values());
+// console.log(hashBrown.entries());
+// console.log(hashBrown.map);
 
-console.log(hashBrown.loadFactor+' '+hashBrown.capacity);
+const test = new hashMap(0.75, 16)
 
-hashBrown.set('King','Stannis');
-hashBrown.set('Hand','Renly');
-hashBrown.set('Former','Robert');
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
 
-console.log(hashBrown.get('King'));
-console.log(hashBrown.has('King'));
-console.log(hashBrown.has('Heir'));
-// console.log(hashBrown.remove('King'));
-console.log(hashBrown.has('King'));
-// console.log(hashBrown.map[7].size());
-console.log(hashBrown.map[8]);
-
-console.log(!hashBrown.map[7]);
-
-
-// console.log(hashBrown.clear());
-
-console.log(hashBrown.values());
-console.log(hashBrown.entries());
-
-console.log(hashBrown.map);
-// console.log(hashBrown.length());
-
-// console.log(hashBrown.map[7].toStringMap());
-
+console.log(test.values());
+console.log(test.entries());
+console.log(test.map);
 
 
 
