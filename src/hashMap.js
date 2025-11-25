@@ -170,15 +170,13 @@ class hashMap {
                     if (bucket.pointer.value.key == key) {
 
                         let storeIndex = bucket.finds(bucket.pointer.value.value);
-
-                        console.log(storeIndex);
                         
                         bucket.removeAt(storeIndex);
 
                         if (bucket.size() == 0) {
-                            console.log(this.map.indexOf(bucket));
                             
                             this.map[this.map.indexOf(bucket)] = undefined;
+
                         }
 
                         return true;
@@ -234,6 +232,38 @@ class hashMap {
         }
 
         return 'Map cleared';
+
+    }
+
+    keys() {
+
+        let keys = [];
+        
+        for (let bucket of this.map) {
+
+            if (bucket) {
+
+                bucket.pointer = bucket.head;
+
+                while (bucket.pointer != null || bucket.pointer == bucket.head) {
+
+                    keys.push(bucket.pointer.value.key);
+
+                    if (bucket.pointer.nextNode == null) {
+
+                        break;
+
+                    }
+
+                    bucket.pointer = bucket.pointer.nextNode;
+
+                }
+
+            }
+
+        }
+
+        return keys;
 
     }
 

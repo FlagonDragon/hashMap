@@ -17,9 +17,17 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 test.set('moon', 'silver')
+test.set('ice cream', 'vanilla')
 
-// console.log(test.length());
+console.log(test.get('hat'));
+console.log(test.has('hat'));
+// console.log(test.remove('hat'));
+// console.log(test.has('hat'));
+// console.log(test.clear());
+
+console.log(test.length());
 console.log(test.capacity);
+console.log(test.keys());
 console.log(test.values());
 console.log(test.entries());
 console.log(test.map);
