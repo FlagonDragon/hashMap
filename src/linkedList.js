@@ -20,7 +20,7 @@ class linkedList {
 
     append(value) {
 
-        console.log('append value: '+value);
+        console.log('append value: '+value.value);
 
         if (!this.head) {
 
@@ -82,13 +82,13 @@ class linkedList {
         
         this.pointer = this.head;
         
-        console.log(this.pointer);
+        // console.log(this.pointer);
 
         let nodeCount = 1; 
 
         while (this.pointer.nextNode != null) {
 
-            console.log(this.pointer.nextNode);
+            // console.log(this.pointer.nextNode);
 
             this.pointer = this.pointer.nextNode;
 
