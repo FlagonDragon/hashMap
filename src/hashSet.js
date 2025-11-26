@@ -1,6 +1,6 @@
 import linkedList from "./linkedList";
 
-class hashMap {
+class hashSet {
 
     constructor(loadFactor, capacity) {
         this.loadFactor = loadFactor;
@@ -21,7 +21,7 @@ class hashMap {
 
     }
 
-    set(key, value) {
+    set(key) {
 
         if (this.length() == this.capacity * this.loadFactor) {
 
@@ -29,15 +29,15 @@ class hashMap {
 
             this.capacity *= 2;        
             
-            let keyValuePairs = this.entries();
+            let keyValues = this.entries();
 
             this.clear();
 
-            console.log(keyValuePairs);
+            console.log(keyValues);
 
-            for (let keyValuePair of keyValuePairs) {
+            for (let keyValue of keyValues) {
                 
-                this.set(keyValuePair.key,keyValuePair.value);
+                this.set(keyValue.key, keyValue.value);
 
             }
             
@@ -59,15 +59,9 @@ class hashMap {
 
             while (this.map[hashCode].pointer != null || this.map[hashCode].pointer == this.map[hashCode].head) {
 
-                if (this.map[hashCode].pointer.value.key == key) {
+                if (this.map[hashCode].pointer.value == key) {
 
-                    let storeIndex = this.map[hashCode].finds(this.map[hashCode].pointer.value.value);
-                    
-                    this.map[hashCode].removeAt(storeIndex);
-
-                    this.map[hashCode].insertAt({key: key, value: value}, storeIndex);
-
-                    return;
+                    return 'Value already exists';
 
                 }
 
@@ -83,7 +77,7 @@ class hashMap {
 
         }
 
-        this.map[hashCode].append({key: key, value: value});
+        this.map[hashCode].append(key);
         
         console.log(this.map[hashCode]);
         
@@ -99,9 +93,9 @@ class hashMap {
 
                 while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
-                    if (bucket.pointer.value.key == key) {
+                    if (bucket.pointer.value == key) {
 
-                        return bucket.pointer.value.value;
+                        return bucket.pointer.value;
 
                     }
 
@@ -133,7 +127,7 @@ class hashMap {
 
                 while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
-                    if (bucket.pointer.value.key == key) {
+                    if (bucket.pointer.value == key) {
 
                         return true;
 
@@ -167,9 +161,9 @@ class hashMap {
 
                 while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
-                    if (bucket.pointer.value.key == key) {
+                    if (bucket.pointer.value == key) {
 
-                        let storeIndex = bucket.finds(bucket.pointer.value.value);
+                        let storeIndex = bucket.finds(bucket.pointer.value);
                         
                         bucket.removeAt(storeIndex);
 
@@ -247,7 +241,7 @@ class hashMap {
 
                 while (bucket.pointer != null || bucket.pointer == bucket.head) {
 
-                    keys.push(bucket.pointer.value.key);
+                    keys.push(bucket.pointer.value);
 
                     if (bucket.pointer.nextNode == null) {
 
@@ -267,82 +261,27 @@ class hashMap {
 
     }
 
-    values() {
-
-        let values = [];
-        
-        for (let bucket of this.map) {
-
-            if (bucket) {
-
-                bucket.pointer = bucket.head;
-
-                while (bucket.pointer != null || bucket.pointer == bucket.head) {
-
-                    values.push(bucket.pointer.value.value);
-
-                    if (bucket.pointer.nextNode == null) {
-
-                        break;
-
-                    }
-
-                    bucket.pointer = bucket.pointer.nextNode;
-
-                }
-
-            }
-
-        }
-
-        return values;
-
-    }
-
-    entries() {
-
-        let entries = [];
-        
-        for (let bucket of this.map) {
-
-            if (bucket) {
-
-                bucket.pointer = bucket.head;
-
-                while (bucket.pointer != null || bucket.pointer == bucket.head) {
-
-                    entries.push(bucket.pointer.value);
-
-                    if (bucket.pointer.nextNode == null) {
-
-                        break;
-
-                    }
-
-                    bucket.pointer = bucket.pointer.nextNode;
-
-                }
-
-            }
-
-        }
-
-        return entries;
-
-    }
-
 };
 
-// const hashBrown = new hashMap(0.75, 16);
-// console.log(hashBrown.loadFactor+' '+hashBrown.capacity);
-// hashBrown.set('King','Stannis');
-// hashBrown.set('Hand','Renly');
-// hashBrown.set('Former','Robert');
-// console.log(hashBrown.values());
-// console.log(hashBrown.entries());
-// console.log(hashBrown.map);
+const hashBrown = new hashSet(0.75, 16);
+console.log(hashBrown.loadFactor+' '+hashBrown.capacity);
+hashBrown.set('Stannis');
+hashBrown.set('Renly');
+hashBrown.set('Robert');
+console.log(hashBrown.set('Renly'));
+ 
 
-export default hashMap;
+
+// console.log(hashBrown.has('Stannis'));
+// console.log(hashBrown.remove('Stannis'));
+// console.log(hashBrown.has('Stannis'));
+// console.log(hashBrown.get('Robert'));
+
+console.log(hashBrown.length());
+console.log(hashBrown.keys());
+console.log(hashBrown.map);
+
+export default hashSet;
 
 
 
