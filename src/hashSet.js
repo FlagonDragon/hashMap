@@ -1,6 +1,6 @@
 import linkedList from "./linkedList";
 
-class hashSet {
+class HashSet {
 
     constructor(loadFactor, capacity) {
         this.loadFactor = loadFactor;
@@ -263,7 +263,7 @@ class hashSet {
 
 };
 
-const hashBrown = new hashSet(0.75, 16);
+const hashBrown = new HashSet(0.75, 16);
 console.log(hashBrown.loadFactor+' '+hashBrown.capacity);
 hashBrown.set('Stannis');
 hashBrown.set('Renly');
@@ -281,7 +281,7 @@ console.log(hashBrown.length());
 console.log(hashBrown.keys());
 console.log(hashBrown.map);
 
-export default hashSet;
+export default HashSet;
 
 
 

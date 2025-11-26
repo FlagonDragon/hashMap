@@ -1,6 +1,6 @@
 import linkedList from "./linkedList";
 
-class hashMap {
+class HashMap {
 
     constructor(loadFactor, capacity) {
         this.loadFactor = loadFactor;
@@ -61,11 +61,7 @@ class hashMap {
 
                 if (this.map[hashCode].pointer.value.key == key) {
 
-                    let storeIndex = this.map[hashCode].finds(this.map[hashCode].pointer.value.value);
-                    
-                    this.map[hashCode].removeAt(storeIndex);
-
-                    this.map[hashCode].insertAt({key: key, value: value}, storeIndex);
+                    this.map[hashCode].pointer.value.value = value;
 
                     return;
 
@@ -333,7 +329,7 @@ class hashMap {
 
 };
 
-// const hashBrown = new hashMap(0.75, 16);
+// const hashBrown = new HashMap(0.75, 16);
 // console.log(hashBrown.loadFactor+' '+hashBrown.capacity);
 // hashBrown.set('King','Stannis');
 // hashBrown.set('Hand','Renly');
@@ -342,7 +338,7 @@ class hashMap {
 // console.log(hashBrown.entries());
 // console.log(hashBrown.map);
 
-export default hashMap;
+export default HashMap;
 
 
 
